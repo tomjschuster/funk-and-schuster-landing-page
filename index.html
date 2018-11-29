@@ -20,18 +20,57 @@
     <meta name="msapplication-TileColor" content="#2d89ef">
     <meta name="msapplication-config" content="icons/browserconfig.xml">
     <meta name="theme-color" content="#fefefe">
+
+    <link rel="stylesheet" type="text/css" href="css/modern-normalize.css" />
+    <style>
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .title {
+        text-align: center;
+      }
+
+      .feature-photo {
+        width: 100%;
+      }
+
+      .photo {
+        width: 500px;
+      }
+
+      .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+      }
+    </style>
+
   </head>
   <body>
     <header>
-      <h1>Funk and Schuster Fine Art Printing</h1>
+      <h1 class="title">
+        <img src="images/logo.png" alt="Funk and Schuster Fine Art Printing" />
+      </h1>
+      <a href="#contact">Contact</a>
     </header>
     <main>
-      <p>
+      <p class="summary">
         The Funk and Schuster studio produces high quality lithographs using aluminum offset plates on a 40" SORS Heidelberg, and a 55" Dufa for specialty work and large prints. Working one on one with the printer, artists have access to a unique variety of choices in format, size, and materials to create stunning art.
       </p>
+      <section class="gallery">
+        <figure class="feature-photo"><img src="images/dufa.jpg" /></figure>
+        <figure class="photo"><img src="images/vladimir-schuster.jpg" /></figure>
+        <figure class="photo"><img src="images/richard-pepitone-and-vladmir-schuster.jpg" /></figure>
+        <figure class="photo"><img src="images/richard-pepitone.jpg" /></figure>
+        <figure class="photo"><img src="images/bill-evaul.jpg" /></figure>
+        <figure class="photo"><img src="images/bill-evaul-art.jpg" /></figure>
+        <figure class="photo"><img src="images/richard-pepitone-art.jpg" /></figure>
+      </section>
     </main>
     <footer>
-      <address>
+      <address id="contact" class="contact-info">
         <a href="https://goo.gl/maps/DjSzd9kMcqB2" target="_blank">
           <span class="street">2017 U.S. 6</span>
           <span class="city">Provincetown, MA 02657</span>
