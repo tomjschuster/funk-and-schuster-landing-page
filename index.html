@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-    <meta name="description" content="Funk and  Schuster Fine Art Printing works with artists to create high quality lithographs, giving them a variety of choices in format, size and materials.">
+    <meta http-equiv="Content-Type" about="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" about="IE=edge">
+    <meta name="viewport" about="width=device-width, initial-scale=1, user-scalable=0">
+    <meta name="description" about="Funk and  Schuster Fine Art Printing works with artists to create high quality lithographs, giving them a variety of choices in format, size and materials.">
 
     <title>Funk and Schuster Fine Art Printing</title>
 
@@ -15,29 +15,56 @@
     <link rel="manifest" href="icons/site.webmanifest">
     <link rel="mask-icon" href="icons/safari-pinned-tab.svg" color="#5bbad5">
     <link rel="shortcut icon" href="icons/favicon.ico">
-    <meta name="apple-mobile-web-app-title" content="Funk and Schuster">
-    <meta name="application-name" content="Funk and Schuster">
-    <meta name="msapplication-TileColor" content="#2d89ef">
-    <meta name="msapplication-config" content="icons/browserconfig.xml">
-    <meta name="theme-color" content="#fefefe">
+    <meta name="apple-mobile-web-app-title" about="Funk and Schuster">
+    <meta name="application-name" about="Funk and Schuster">
+    <meta name="msapplication-TileColor" about="#2d89ef">
+    <meta name="msapplication-config" about="icons/browserconfig.xml">
+    <meta name="theme-color" about="#fefefe">
 
     <link rel="stylesheet" type="text/css" href="css/modern-normalize.css" />
     <style>
-      img {
+      body {
+        padding: 45px;
+      }
+      
+      /* Header */
+      .title {
+        display: block;
+        text-align: center;
+        margin: 25px 0 0;
+      }
+
+      .title img {
+        max-width: 100%
+      }
+
+      /* Main  */
+      .photo img {
         max-width: 100%;
         height: auto;
       }
 
-      .title {
+      .about {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-around;
+        margin: 50px 0;
+      }
+
+      .about .summary, .about .photo {
+        display: inline-block;
+        width: 500px;
         text-align: center;
       }
 
-      .feature-photo {
-        width: 100%;
+      .contact {
+        text-align: center;
+        margin: 100px;
       }
 
-      .photo {
-        width: 500px;
+      .contact a {
+        display: block;
       }
 
       .gallery {
@@ -45,6 +72,28 @@
         flex-wrap: wrap;
         justify-content: space-around;
       }
+
+      .photo {
+        width: 800px;
+        max-width: 100%;
+      }
+
+      @media only screen and (min-width: 1000px) {
+        .photo {
+          width: 40%;
+        }
+        
+        .about .summary, .about .photo {
+          width: 45%;
+        }
+      }
+
+      /* Footer */
+      .copyright {
+        text-align: center;
+        text-transform: capitalize;
+      }
+
     </style>
 
   </head>
@@ -53,24 +102,18 @@
       <h1 class="title">
         <img src="images/logo.png" alt="Funk and Schuster Fine Art Printing" />
       </h1>
-      <a href="#contact">Contact</a>
     </header>
     <main>
-      <p class="summary">
-        The Funk and Schuster studio produces high quality lithographs using aluminum offset plates on a 40" SORS Heidelberg, and a 55" Dufa for specialty work and large prints. Working one on one with the printer, artists have access to a unique variety of choices in format, size, and materials to create stunning art.
-      </p>
-      <section class="gallery">
-        <figure class="feature-photo"><img src="images/dufa.jpg" /></figure>
-        <figure class="photo"><img src="images/vladimir-schuster.jpg" /></figure>
-        <figure class="photo"><img src="images/richard-pepitone-and-vladmir-schuster.jpg" /></figure>
-        <figure class="photo"><img src="images/richard-pepitone.jpg" /></figure>
-        <figure class="photo"><img src="images/bill-evaul.jpg" /></figure>
-        <figure class="photo"><img src="images/bill-evaul-art.jpg" /></figure>
-        <figure class="photo"><img src="images/richard-pepitone-art.jpg" /></figure>
+      <section class="about">
+        <div class="summary">
+          <h2>High quality lithographs</h2>
+          <p>
+            The Funk & Schuster studio gives artists access to a unique variety of choices in format, size, and materials to create stunning art.
+          </p>
+        </div>
+        <figure class="photo"><img src="images/dufa.jpg" /></figure>
       </section>
-    </main>
-    <footer>
-      <address id="contact" class="contact-info">
+      <address class="contact">
         <a href="https://goo.gl/maps/DjSzd9kMcqB2" target="_blank">
           <span class="street">2017 U.S. 6</span>
           <span class="city">Provincetown, MA 02657</span>
@@ -78,6 +121,19 @@
         <a href="mailto:funkandschuster@gmail.com" target="_blank">funkandschuster@gmail.com</a>
         <a href="https://instagr.am/schustervladimir" target="_blank">Instagram</a>
       </address>
+      <section class="gallery">
+        <figure class="photo"><img src="images/vladimir-schuster.jpg" /></figure>
+        <figure class="photo"><img src="images/richard-pepitone-and-vladmir-schuster.jpg" /></figure>
+        <figure class="photo"><img src="images/richard-pepitone.jpg" /></figure>
+        <figure class="photo"><img src="images/bill-evaul.jpg" /></figure>
+        <figure class="photo"><img src="images/richard-pepitone-art.jpg" /></figure>
+        <figure class="photo"><img src="images/bill-evaul-art.jpg" /></figure>
+      </section>
+    </main>
+    <footer>
+      <p class="copyright">
+        copyright © 2018 Funk and Schuster Fine Art Printing.
+      </p>
     </footer>
   </body>
 </html>
