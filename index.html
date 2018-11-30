@@ -23,56 +23,105 @@
 
     <link rel="stylesheet" type="text/css" href="css/modern-normalize.css" />
     <style>
-      body {
-        padding: 45px;
-      }
-
       * {
-        font-family: georgia;
+        font-family: helvetica;
       }
       
       /* Header */
+      header {
+        max-width: 1300px;
+        display: block;
+        margin: 0 auto;
+      }
+
       .title {
         display: block;
         text-align: center;
-        margin: 25px 0 0;
+        margin: 45px 0;
       }
 
       .title img {
-        max-width: 100%
+        max-width: 80%;
+      }
+
+      .contact-link {
+        position: absolute;
+        right: 4vw;
+        top: 4vh;
+        text-decoration: none;
+        color: black;
+        font-size: 2em;
+      }
+
+      @media only screen and (min-width: 130px) {
+        .contact-link {
+          font-size: 30px;
+        }
+      }
+
+      @media only screen and (max-width: 1000px) {
+        .title {
+          margin: 75px 0 30px;
+        }
+
+        .contact-link {
+          top: 4vw;
+        }
       }
 
       /* Main  */
+      .photo {
+        width: 80%;
+        min-width: 330px;
+        max-width: 800px;
+        margin: 0 auto;
+        display: block;
+      }
+
       .photo img {
         max-width: 100%;
         height: auto;
       }
 
+      .gallery .photo {
+        margin-bottom: 40px;
+      }
+
       .about {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-around;
-        margin: 50px 0;
-      }
-
-      .about .summary, .about .photo {
-        display: inline-block;
+        display: block;
         text-align: center;
+        margin: 75px auto;
+        padding: 0 45px;
+        max-width: 1000px;
       }
 
-      .about .summary {
-        margin: 0 0 50px;
+      .about h2 {
+        font-size: 2.5em;
+        font-weight: normal;
+        text-transform: capitalize;
       }
 
-      .about .summary h2 {
-        font-size: 2em;
+      .about p {
+        font-size: 1.33em;
       }
 
-      .about .summary p {
-        font-size: 1.5em;
+      @media only screen and (min-width: 1000px) {
+        .gallery {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          align-items: center;
+          width: 90%;
+          margin: auto;
+        }
+
+        .gallery .photo {
+          display: inline-block;
+          width: 45%;
+        }
       }
 
+      /* Footer */
       .contact {
         text-align: center;
         margin: 100px;
@@ -82,28 +131,6 @@
         display: block;
       }
 
-      .gallery {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-      }
-
-      .photo {
-        width: 800px;
-        max-width: 100%;
-      }
-
-      @media only screen and (min-width: 1000px) {
-        .photo {
-          width: 40%;
-        }
-        
-        .about .summary, .about .photo {
-          width: 40%;
-        }
-      }
-
-      /* Footer */
       .copyright {
         text-align: center;
         text-transform: capitalize;
@@ -114,28 +141,19 @@
   </head>
   <body>
     <header>
+      <a class="contact-link" href="#contact">Contact</a>
       <h1 class="title">
         <img src="images/logo.png" alt="Funk and Schuster Fine Art Printing" />
       </h1>
     </header>
     <main>
+      <figure class="hero photo"><img src="images/dufa.jpg" /></figure>
       <section class="about">
-        <div class="summary">
-          <h2>High quality lithographs</h2>
-          <p>
-            The Funk & Schuster studio gives artists access to a unique variety of choices in format, size, and materials to create stunning art.
-          </p>
-        </div>
-        <figure class="photo"><img src="images/dufa.jpg" /></figure>
+        <h2>High quality lithographs</h2>
+        <p>
+          Vladimir Schuster's printing career spans over 40 years from Minsk, Belarus to Varick Street, NYC. He now brings his expertise and appreciation for fine art to the vibrant community of Provincetown in Cape Cod, Massachusetts. With experience in all aspects of the printing process from pre-press to finishing, Vladimir can assist artists in using a wide range of creative choices to create high quality plates for lithographic printing.
+        </p>
       </section>
-      <address class="contact">
-        <a href="https://goo.gl/maps/DjSzd9kMcqB2" target="_blank">
-          <span class="street">2017 U.S. 6</span>
-          <span class="city">Provincetown, MA 02657</span>
-        </a>
-        <a href="mailto:funkandschuster@gmail.com" target="_blank">funkandschuster@gmail.com</a>
-        <a href="https://instagr.am/schustervladimir" target="_blank">Instagram</a>
-      </address>
       <section class="gallery">
         <figure class="photo"><img src="images/vladimir-schuster.jpg" /></figure>
         <figure class="photo"><img src="images/richard-pepitone-and-vladmir-schuster.jpg" /></figure>
@@ -146,6 +164,15 @@
       </section>
     </main>
     <footer>
+      <address id="contact" class="contact">
+        <a href="https://goo.gl/maps/DjSzd9kMcqB2" target="_blank">
+          <span class="street">2017 U.S. 6</span>
+          <span class="city">Provincetown, MA 02657</span>
+        </a>
+        <a href="mailto:funkandschuster@gmail.com" target="_blank">funkandschuster@gmail.com</a>
+        <a href="https://instagr.am/schustervladimir" target="_blank">Instagram</a>
+      </address>
+
       <p class="copyright">
         copyright © 2018 Funk and Schuster Fine Art Printing.
       </p>
