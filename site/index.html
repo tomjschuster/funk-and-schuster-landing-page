@@ -72,7 +72,15 @@
 
 
       /* Main  */
+      .photo img {
+        width: 100%;
+      }
 
+      .photo.main {
+        width: 400px;
+        max-width: 80%;
+        margin: 0 auto;
+      }
       .photo.hero {
         width: 80%;
         max-width: 800px;
@@ -144,9 +152,19 @@
         padding-bottom: 5px;
       }
 
+      .inkblob-logo.photo {
+        display: block;
+        max-width: 330px;
+        margin: 75px auto 0;
+      }
+      .inkblob-logo.photo img {
+        display: block;
+        margin: 0 auto;
+      }
+
       .contact {
         text-align: center;
-        margin: 60px auto;
+        margin: 30px auto 60px;
         padding: 0 30px;
       }
 
@@ -212,7 +230,9 @@
       </h1>
     </header>
     <main>
-      <figure class="hero photo"><img src="images/dufa.jpg" alt="Dufa Printing Press" /></figure>
+      <figure class="photo main">
+          <img src="images/vladimir-schuster-1.jpg" alt="Vladimir schuster" />
+        </figure>
       <section class="about">
         <p>
           Vladimir Schuster's printing career spans over 40 years from Minsk, Belarus to Varick Street, NYC. He now brings his expertise and appreciation for fine art to the vibrant community of Provincetown in Cape Cod, Massachusetts. With experience in all aspects of the printing process from pre-press to finishing, Vladimir can assist artists in using a wide range of creative choices to create high quality plates for lithographic printing.
@@ -223,7 +243,7 @@
           <img src="images/richard-pepitone-and-vladimir-schuster.jpg" alt="Richard Pepitone and Vladimir Schuster" />
         </figure>
         <figure class="photo paper">
-          <img src="images/heidelberg.jpg" alt="Heidelberg Printing Press" />
+          <img src="images/dufa.jpg" alt="Dufa Printing Press" />
         </figure>
         <figure class="photo paper">
           <img src="images/richard-pepitone-art.jpg" alt="Richard Pepitone Art" />
@@ -231,6 +251,9 @@
       </section>
     </main>
     <footer>
+      <figure class="photo inkblob-logo">
+        <img src="images/inkblob-logo.png" alt="Inkblob Logo" />
+      </figure>
       <address id="contact" class="contact">
         <p>Funk & Schuster</p><p>Fine Art Printing</p>
         <a href="https://goo.gl/maps/DjSzd9kMcqB2" target="_blank" rel="noreferrer">
