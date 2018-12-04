@@ -46,9 +46,17 @@
         margin: 0;
       }
 
+      /*******************
+       ***** General *****
+       *******************/
+
       * {
         font-family: Helvetica, sans-serif;
         color: #222;
+      }
+
+      .noscroll {
+        overflow-y: hidden;
       }
 
 
@@ -146,6 +154,46 @@
         .gallery .photo:last-child {
           margin-left: 1;
         }
+
+        .gallery .photo img {
+          cursor: pointer;
+        }
+      }
+
+      #selected-photo {
+        display: none;
+      }
+
+      #selected-photo.active {
+        /*text-align: center;*/
+        position: fixed;
+        display: block;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        background-color: rgba(0, 0, 0, 0.75);
+      }
+
+      #selected-photo.active img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0 auto;
+        width: 85%;
+      }
+
+      #selected-photo button {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 2.5em;
+        cursor: pointer;
+        font-weight: bold;
+        padding: 15px;
       }
 
       /******************** 
@@ -280,5 +328,102 @@
         copyright © 2018 Funk and Schuster Fine Art Printing.
       </p>
     </footer>
+    <section id="selected-photo">
+      <button>X</button>
+      <img />
+    </section>
+    <script>
+      var galleryPhotos = document.querySelectorAll('.gallery .photo > img')
+      var selectedPhoto = document.querySelector('#selected-photo')
+      var selectedPhotoImg = document.querySelector('#selected-photo > img')
+      selectedPhotoImg.onclick = function (event) { event.stopPropagation() }
+
+      selectedPhoto.onclick = closeSelectedPhoto
+
+      for (var i = 0; i < galleryPhotos.length; i++) {
+        galleryPhotos[i].onclick = openSelectedPhoto
+      }
+
+      function openSelectedPhoto () {
+        if (window.innerWidth >= 1000) {
+          selectedPhotoImg.src = this.src
+          selectedPhoto.className = addClass(selectedPhoto.className, 'active')
+          document.body.className = addClass(document.body.className, 'noscroll')
+
+          document.onkeydown = function (event) {
+            switch (event.keyCode) {
+              case 13:
+              case 27:
+                closeSelectedPhoto()
+                break
+              case 32:
+              case 37:
+              case 38:
+                selectNextPhoto()
+                break
+              case 39:
+              case 40:
+                selectPreviousPhoto()
+                break
+            }
+          }
+        }
+      }
+
+      function closeSelectedPhoto () {
+        if (selectedPhoto.src !== '') {
+          document.body.className = removeClass(document.body.className, 'noscroll')
+          selectedPhoto.className = removeClass(selectedPhoto.className, 'active')
+          selectedPhotoImg.src = ''
+          document.onkeydown = null
+        }
+      }
+
+      function selectNextPhoto () {
+        if (selectedPhoto.src !== '') {
+          for (var i = 0; i < galleryPhotos.length; i++) {
+            var photo = galleryPhotos[i]
+            if (photo.src === selectedPhotoImg.src) {
+              if (galleryPhotos[i + 1]) {
+                selectedPhotoImg.src = galleryPhotos[i + 1].src
+                return
+              } else if (galleryPhotos[0]) {
+                selectedPhotoImg.src = galleryPhotos[0].src
+                return
+              }
+            }
+          }
+        }
+      }
+
+      function selectPreviousPhoto () {
+        if (selectedPhoto.src !== '') {
+          for (var i = 0; i < galleryPhotos.length; i++) {
+            var photo = galleryPhotos[i]
+            if (photo.src === selectedPhotoImg.src) {
+              if (galleryPhotos[i - 1]) {
+                selectedPhotoImg.src = galleryPhotos[i - 1].src
+                return
+              } else if (galleryPhotos[galleryPhotos.length - 1]) {
+                selectedPhotoImg.src = galleryPhotos[galleryPhotos.length - 1].src
+                return
+              }
+            }
+          }
+        }
+      }
+
+      function removeClass (className, classToRemove) {
+        return className
+          .split(/\s+/g)
+          .filter(function (current) { return current !== classToRemove })
+          .join(' ')
+          .trim()
+      }
+
+      function addClass (className, classToAdd) {
+        return (removeClass(className, classToAdd) + ' ' + classToAdd).trim()
+      }
+    </script>
   </body>
 </html>
