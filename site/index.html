@@ -158,65 +158,42 @@
         .gallery .photo img {
           cursor: pointer;
         }
-
       }
 
-      #selected-photo, .overlay,
-      #selected-photo input,
-      #selected-photo img {
+      #selected-photo {
         display: none;
       }
 
-      @media only screen and (min-width: 1000px) {
-        input:focus ~ .overlay {
-          position: fixed;
-          z-index: 1;
-          display: block;
-          width: 100vw;
-          height: 100vh;
-          top: 0;
-          left: 0;
-          background-color: rgba(0, 0, 0, 0.75);
-        }
+      #selected-photo.active {
+        /*text-align: center;*/
+        position: fixed;
+        display: block;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        background-color: rgba(0, 0, 0, 0.75);
+      }
 
-        input:focus ~ #selected-photo {
-          /*text-align: center;*/
-          z-index: 2;
-          position: fixed;
-          display: block;
-          width: 100vw;
-          height: 100vh;
-          top: 0;
-        }
+      #selected-photo.active img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0 auto;
+        width: 85%;
+      }
 
-        input:nth-of-type(1):focus ~ #selected-photo img:nth-of-type(1),
-        input:nth-of-type(2):focus ~ #selected-photo img:nth-of-type(2),
-        input:nth-of-type(3):focus ~ #selected-photo img:nth-of-type(3),
-         #selected-photo img:focus:nth-of-type(1),
-         #selected-photo img:focus:nth-of-type(2),
-         #selected-photo img:focus:nth-of-type(3) {
-          z-index: 2;
-          position: fixed;
-          display: block;
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%, -50%);
-          margin: 0 auto;
-          width: 85%;
-        }
-
-        input:checked ~ #selected-photo span {
-          position: fixed;
-          top: 5px;
-          right: 10px;
-          background: transparent;
-          border: none;
-          color: white;
-          font-size: 2.5em;
-          cursor: pointer;
-          font-weight: bold;
-          padding: 15px;
-        }
+      #selected-photo button {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 2.5em;
+        cursor: pointer;
+        font-weight: bold;
+        padding: 15px;
       }
 
       /******************** 
@@ -314,20 +291,15 @@
         </p>
       </section>
       <section class="gallery">
-        <label for="photo-1">
-          <figure class="photo paper">
-            <img src="/images/richard-pepitone-and-vladimir-schuster.jpg" alt="Richard Pepitone and Vladimir Schuster" />
-          </figure>
-        </label>
-        <label for="photo-2">
-          <figure class="photo paper">
-            <img src="/images/richard-pepitone-art-3.jpg" alt="Richard Pepitone Art" />
-          </figure>
-        </label>
-        <label for="photo-3">
-          <figure class="photo paper">
-            <img src="/images/dufa.jpg" alt="Dufa Printing Press" />
-        </label>
+        <figure class="photo paper">
+          <img src="/images/richard-pepitone-and-vladimir-schuster.jpg" alt="Richard Pepitone and Vladimir Schuster" />
+        </figure>
+        <figure class="photo paper">
+          <img src="/images/richard-pepitone-art-3.jpg" alt="Richard Pepitone Art" />
+        </figure>
+        <figure class="photo paper">
+          <img src="/images/dufa.jpg" alt="Dufa Printing Press" />
+        </figure>
       </section>
     </main>
     <footer>
@@ -356,14 +328,102 @@
         copyright © 2018 Funk and Schuster Fine Art Printing.
       </p>
     </footer>
-    <input id="photo-1" type="radio" name="selected-photo">
-    <input id="photo-2" type="radio" name="selected-photo">
-    <input id="photo-3" type="radio" name="selected-photo">
-    <label for="no-photo" id="selected-photo" class="overlay">
-      <span>X</span>
-      <img tabindex="1" src="/images/richard-pepitone-and-vladimir-schuster.jpg" alt="Richard Pepitone and Vladimir Schuster" />
-      <img tabindex="1" src="/images/richard-pepitone-art-3.jpg" alt="Richard Pepitone Art" />
-      <img tabindex="1" src="/images/dufa.jpg" alt="Dufa Printing Press" />
-    </label>
+    <section id="selected-photo">
+      <button>X</button>
+      <img />
+    </section>
+    <script>
+      var galleryPhotos = document.querySelectorAll('.gallery .photo > img')
+      var selectedPhoto = document.querySelector('#selected-photo')
+      var selectedPhotoImg = document.querySelector('#selected-photo > img')
+      selectedPhotoImg.onclick = function (event) { event.stopPropagation() }
+
+      selectedPhoto.onclick = closeSelectedPhoto
+
+      for (var i = 0; i < galleryPhotos.length; i++) {
+        galleryPhotos[i].onclick = openSelectedPhoto
+      }
+
+      function openSelectedPhoto () {
+        if (window.innerWidth >= 1000) {
+          selectedPhotoImg.src = this.src
+          selectedPhoto.className = addClass(selectedPhoto.className, 'active')
+          document.body.className = addClass(document.body.className, 'noscroll')
+
+          document.onkeydown = function (event) {
+            switch (event.keyCode) {
+              case 13:
+              case 27:
+                closeSelectedPhoto()
+                break
+              case 32:
+              case 37:
+              case 38:
+                selectNextPhoto()
+                break
+              case 39:
+              case 40:
+                selectPreviousPhoto()
+                break
+            }
+          }
+        }
+      }
+
+      function closeSelectedPhoto () {
+        if (selectedPhoto.src !== '') {
+          document.body.className = removeClass(document.body.className, 'noscroll')
+          selectedPhoto.className = removeClass(selectedPhoto.className, 'active')
+          selectedPhotoImg.src = ''
+          document.onkeydown = null
+        }
+      }
+
+      function selectNextPhoto () {
+        if (selectedPhoto.src !== '') {
+          for (var i = 0; i < galleryPhotos.length; i++) {
+            var photo = galleryPhotos[i]
+            if (photo.src === selectedPhotoImg.src) {
+              if (galleryPhotos[i + 1]) {
+                selectedPhotoImg.src = galleryPhotos[i + 1].src
+                return
+              } else if (galleryPhotos[0]) {
+                selectedPhotoImg.src = galleryPhotos[0].src
+                return
+              }
+            }
+          }
+        }
+      }
+
+      function selectPreviousPhoto () {
+        if (selectedPhoto.src !== '') {
+          for (var i = 0; i < galleryPhotos.length; i++) {
+            var photo = galleryPhotos[i]
+            if (photo.src === selectedPhotoImg.src) {
+              if (galleryPhotos[i - 1]) {
+                selectedPhotoImg.src = galleryPhotos[i - 1].src
+                return
+              } else if (galleryPhotos[galleryPhotos.length - 1]) {
+                selectedPhotoImg.src = galleryPhotos[galleryPhotos.length - 1].src
+                return
+              }
+            }
+          }
+        }
+      }
+
+      function removeClass (className, classToRemove) {
+        return className
+          .split(/\s+/g)
+          .filter(function (current) { return current !== classToRemove })
+          .join(' ')
+          .trim()
+      }
+
+      function addClass (className, classToAdd) {
+        return (removeClass(className, classToAdd) + ' ' + classToAdd).trim()
+      }
+    </script>
   </body>
 </html>
